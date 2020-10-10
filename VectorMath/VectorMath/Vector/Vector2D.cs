@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Globalization;
 
 namespace VectorMath.Vector
 {
-    public struct Vector2D
+    public struct Vector2D : IEquatable<Vector2D>
     {
         public static Vector2D UnitVector => new Vector2D(1d, 1d);
         public static Vector2D ZeroVector => new Vector2D(0d, 0d);
@@ -13,9 +14,9 @@ namespace VectorMath.Vector
             Y = y;
         }
 
-        public double X { get; set; }
+        public double X;
 
-        public double Y { get; set; }
+        public double Y;
 
         #region ADD
 
@@ -126,6 +127,36 @@ namespace VectorMath.Vector
         public double Length()
         {
             return Math.Sqrt(LengthSquared());
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is Vector2D vector)
+            {
+                return Equals(vector);
+            }
+
+            return false;
+        }
+
+        public bool Equals(Vector2D other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            return X == other.X && Y == other.Y;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(X, Y);
+        }
+
+        public override string ToString()
+        {
+            return $"Vector2D with X: {X.ToString(CultureInfo.InvariantCulture)}, Y: {Y.ToString(CultureInfo.InvariantCulture)}";
         }
 
         #endregion FUNCTIONS

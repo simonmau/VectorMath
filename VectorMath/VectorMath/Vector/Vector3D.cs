@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Globalization;
 
 namespace VectorMath.Vector
 {
-    public struct Vector3D
+    public struct Vector3D : IEquatable<Vector3D>
     {
         public static Vector3D UnitVector => new Vector3D(1d, 1d, 1d);
         public static Vector3D ZeroVector => new Vector3D(0d, 0d, 0d);
@@ -14,11 +15,11 @@ namespace VectorMath.Vector
             Z = z;
         }
 
-        public double X { get; set; }
+        public double X;
 
-        public double Y { get; set; }
+        public double Y;
 
-        public double Z { get; set; }
+        public double Z;
 
         #region ADD
 
@@ -184,6 +185,36 @@ namespace VectorMath.Vector
         public double Length()
         {
             return Math.Sqrt(LengthSquared());
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (obj is Vector3D vector)
+            {
+                return Equals(vector);
+            }
+
+            return false;
+        }
+
+        public bool Equals(Vector3D other)
+        {
+            if (ReferenceEquals(this, other))
+            {
+                return true;
+            }
+
+            return X == other.X && Y == other.Y && Z == other.Z;
+        }
+
+        public override int GetHashCode()
+        {
+            return HashCode.Combine(X, Y, Z);
+        }
+
+        public override string ToString()
+        {
+            return $"Vector3D with X: {X.ToString(CultureInfo.InvariantCulture)}, Y: {Y.ToString(CultureInfo.InvariantCulture)}, Z: {Z.ToString(CultureInfo.InvariantCulture)}";
         }
 
         #endregion FUNCTIONS

@@ -5,6 +5,10 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="BenchmarkDotNet" Version="0.12.1" />
     <PackageReference Include="MathNet.Numerics" Version="4.12.0" />
@@ -14,5 +18,4 @@
   <ItemGroup>
     <ProjectReference Include="..\VectorMath\VectorMath.csproj" />
   </ItemGroup>
-
 </Project>

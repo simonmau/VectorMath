@@ -114,6 +114,54 @@ namespace VectorMath.Vector
 
         #region FUNCTIONS
 
+        /// <summary>
+        /// rotating around the z axis
+        /// </summary>
+        public Vector3D RotateVector(double rotationAngle)
+        {
+            var sin = Math.Sin(rotationAngle);
+            var cos = Math.Cos(rotationAngle);
+
+            var x = cos * X - sin * Y;
+            var y = sin * X + cos * Y;
+
+            return new Vector3D(x, y, Z);
+        }
+
+        /// <summary>
+        /// rotating around a given axis
+        /// </summary>
+        public Vector3D RotateVector(Vector3D axis, double rotationAngle)
+        {
+            var sin = Math.Sin(rotationAngle);
+            var cos = Math.Cos(rotationAngle);
+
+            var klammer = 1d - cos;
+
+            var n1 = axis.X;
+            var n2 = axis.Y;
+            var n3 = axis.Z;
+
+            var n1Sq = n1 * n1;
+            var n2Sq = n2 * n2;
+            var n3Sq = n3 * n3;
+
+            var x = X * (n1Sq * klammer + cos) + Y * (n1 * n2 * klammer - n3 * sin) + Z * (n1 * n3 * klammer + n2 * sin);
+            var y = X * (n2 * n1 * klammer + n3 * sin) + Y * (n2Sq * klammer + cos) + Z * (n2 * n3 * klammer - n1 * sin);
+            var z = X * (n3 * n1 * klammer - n2 * sin) + Y * (n3 * n2 * klammer + n1 * sin) + Z * (n3Sq * klammer + cos);
+
+            return new Vector3D(x, y, z);
+        }
+
+        public void Normalize()
+        {
+            var factor = 1d / Length();
+
+            X *= factor;
+            Y *= factor;
+            Z *= factor;
+        }
+
         public Vector3D CrossProduct(Vector3D right)
         {
             var x = Y * right.Z - Z * right.Y;

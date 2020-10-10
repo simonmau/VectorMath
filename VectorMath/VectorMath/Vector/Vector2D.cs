@@ -105,6 +105,14 @@ namespace VectorMath.Vector
 
         #region FUNCTIONS
 
+        public void Normalize()
+        {
+            var factor = 1d / Length();
+
+            X *= factor;
+            Y *= factor;
+        }
+
         public double ScalarProduct(Vector2D right)
         {
             return X * right.X + Y * right.Y;

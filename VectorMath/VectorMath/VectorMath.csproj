@@ -9,6 +9,7 @@
     <PackageProjectUrl>https://github.com/simonmau/VectorMath</PackageProjectUrl>
     <RepositoryUrl>https://github.com/simonmau/VectorMath</RepositoryUrl>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>

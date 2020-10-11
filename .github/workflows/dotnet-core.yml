@@ -10,6 +10,8 @@ jobs:
   build:
 
     runs-on: ubuntu-latest
+    env:
+      config: 'Release'
 
     steps:
     - uses: actions/checkout@v2
@@ -20,7 +22,7 @@ jobs:
     - name: Install dependencies
       run: dotnet restore VectorMath/VectorMath.sln
     - name: Build
-      run: dotnet build --configuration Release --no-restore VectorMath/VectorMath.sln
+      run: dotnet build --configuration $config --no-restore VectorMath/VectorMath.sln
       # set pr number, if it's a pr build
     - name: set pr build number
       id: PRNUMBER

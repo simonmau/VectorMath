@@ -15,11 +15,11 @@ namespace VectorMath.Vector
             Z = z;
         }
 
-        public double X;
+        public double X { get; set; }
 
-        public double Y;
+        public double Y { get; set; }
 
-        public double Z;
+        public double Z { get; set; }
 
         #region ADD
 
